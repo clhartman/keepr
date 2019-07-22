@@ -19,6 +19,11 @@ namespace keepr.Repositories
       return _db.Query<Keep>("SELECT * FROM keeps WHERE isPrivate = 0");
     }
 
+    public IEnumerable<Keep> GetByUserId(string userId)
+    {
+      return _db.Query<Keep>("SELECT * FROM keeps WHERE userId = @userId", new { userId });
+    }
+
     public Keep GetById(int id)
     {
       string query = "SELECT * FROM keeps WHERE id = @id";
@@ -39,14 +44,27 @@ namespace keepr.Repositories
       return value;
     }
 
-    internal object Update(Keep value)
+    public Keep Update(Keep value)
     {
-      throw new NotImplementedException();
+      string query = @"
+      UPDATE keeps
+      SET
+        name = @Name,
+        description = @Description,
+        img = @Img,
+        isPrivate = @IsPrivate
+      WHERE id = @Id;
+      SELECT * FROM keeps WHERE id = @Id;
+      ";
+      return _db.QueryFirstOrDefault<Keep>(query, value);
     }
 
-    internal object Delete(int id)
+    public string Delete(int id)
     {
-      throw new NotImplementedException();
+      string query = "DELETE FROM keeps WHERE id = @Id";
+      int changedRows = _db.Execute(query, new { id });
+      if (changedRows < 1) throw new Exception("Invalid Id");
+      return "Successfully deleted keep";
     }
   }
 }

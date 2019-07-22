@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using keepr.Models;
 using keepr.Repositories;
@@ -47,33 +48,41 @@ namespace keepr.Controllers
       }
     }
 
-
-    // GET api/keeps/:id/
-    // [HttpGet("{id}/bouquets")]
-    // public ActionResult<IEnumerable<Bouquet>> GetBouquetsByStoreId(int id)
-    // {
-    //   try
-    //   {
-    //     return Ok(_repo.GetBouquetsByStoreId(id));
-    //   }
-    //   catch (Exception e)
-    //   {
-    //     return BadRequest(e);
-    //   }
-    // }
-
+    //GET api/keeps/user
+    [Authorize]
+    [HttpGet("user")]
+    public ActionResult<IEnumerable<Keep>> GetByUser()
+    {
+      var user = HttpContext.User.FindFirstValue("Id");
+      try
+      {
+        return Ok(_repo.GetByUserId(user));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e);
+      }
+    }
 
     // POST api/keeps
     [Authorize]
     [HttpPost]
-    public ActionResult<Keep> Post(Keep value)
+    public ActionResult<Keep> Post([FromBody] Keep value)
     {
-      var userId = HttpContext.User.Identity.Name;
+      var userId = HttpContext.User.FindFirstValue("Id");
       value.UserId = userId;
-      return Ok(_repo.Create(value));
+      if (userId != null)
+      {
+        return Ok(_repo.Create(value));
+      }
+      else
+      {
+        return BadRequest();
+      }
     }
 
     // PUT api/keeps/5
+    [Authorize]
     [HttpPut("{id}")]
     public ActionResult<Keep> Put(int id, [FromBody] Keep value)
     {
