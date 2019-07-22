@@ -47,12 +47,6 @@ namespace keepr.Controllers
       }
     }
 
-    //GET api/keeps/user
-    public ActionResult<IEnumerable<Keep>> GetKeeps()
-    {
-
-    }
-
 
     // GET api/keeps/:id/
     // [HttpGet("{id}/bouquets")]
