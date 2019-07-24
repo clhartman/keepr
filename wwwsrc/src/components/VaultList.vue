@@ -24,6 +24,7 @@
             <div class="card-img-overlay">
               <h5 class="card-title">{{vault.name}}</h5>
               <p class="card-text">{{vault.description}}</p>
+              <button class="btn btn-secondary" type="submit" @click="deleteVault(vault.id)">Delete Vault</button>
             </div>
           </div>
         </div>
@@ -40,7 +41,6 @@
                   </button>
                   <input type="text" class="form-control" placeholder="title" v-model="newVault.name" required>
                   <input type="text" class="form-control" placeholder="description" v-model="newVault.description">
-                  <button class="btn btn-secondary" type="submit">Create Vault</button>
                 </form>
               </div>
             </div>
@@ -67,9 +67,9 @@
       }
     },
     computed: {
-      // user() {
-      //   return this.$store.state.user;
-      // },
+      user() {
+        return this.$store.state.user;
+      },
       vaults() {
         return this.$store.state.userVaults;
       }
@@ -81,9 +81,9 @@
         // $("#vaultModal").modal("hide");
         // $(".modal-backdrop").remove();
       },
-      // deleteVault(vaultId) {
-      //   this.$store.dispatch("deleteVault", vaultId);
-      // }
+      deleteVault(vaultId) {
+        this.$store.dispatch("deleteVault", vaultId);
+      }
     },
     components: {}
   }
