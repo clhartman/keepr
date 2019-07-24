@@ -10,7 +10,9 @@
               <h5 class="card-title">{{keep.name}}</h5>
               <p class="card-text">{{keep.description}}
               </p>
-              <a href="#" class="btn btn-primary">{{keep.views}}</a>
+              <button class="btn btn-primary">Views:{{keep.views}}</button>
+              <button class="btn btn-primary">Keeps:{{keep.keeps}}</button>
+              <button class="btn btn-primary">Shares:{{keep.shares}}</button>
             </div>
           </div>
         </div>
