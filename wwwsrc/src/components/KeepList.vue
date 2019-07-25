@@ -1,6 +1,5 @@
 <template>
   <div class="keeplist">
-    <h1>Keeps Draw here</h1>
     <div class="container" id="public-keeps">
       <div class="row">
         <div class="col" v-for="keep in keeps">

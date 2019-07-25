@@ -124,8 +124,8 @@ export default new Vuex.Store({
         .then(res => {
         })
     },
-    deleteKeep({ commit, dispatch }, keepId) {
-      api.delete('keeps/' + keepId)
+    deleteKeep({ commit, dispatch }, keep) {
+      api.delete('keeps/' + keep.id)
         .then(res => {
           dispatch('getUserKeeps')
           dispatch('getPublicKeeps')
@@ -143,8 +143,9 @@ export default new Vuex.Store({
           dispatch("getUserVaults")
         })
     },
-    deleteVault({ commit, dispatch }, vaultId) {
-      api.delete('vaults/' + vaultId)
+    deleteVault({ commit, dispatch }, vault) {
+      console.log(vault.id)
+      api.delete('vaults/' + vault.id)
         .then(res => {
           dispatch('getUserVaults')
         })

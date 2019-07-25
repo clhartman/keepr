@@ -104,16 +104,17 @@ namespace keepr.Controllers
 
     // DELETE api/vaults/5
     [HttpDelete("{id}")]
-    public ActionResult<String> Delete(int id)
+    public ActionResult<String> Delete(Vault value)
     {
-      try
+      var userId = HttpContext.User.FindFirstValue("Id");
+
+      if (userId == value.UserId)
       {
-        // TODO: Enforce userid matches logged in user
-        return Ok(_repo.Delete(id));
+        return Ok(_repo.Delete(value.Id));
       }
-      catch (Exception e)
+      else
       {
-        return BadRequest(e);
+        return BadRequest();
       }
     }
   }

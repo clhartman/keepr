@@ -4,10 +4,6 @@
     <div class="container" id="user-vaults">
       <div class="row">
         <div class="col">
-          <!-- <button class="btn btn-secondary" data-toggle="modal" data-target="#vaultModal" title="Create Vault"
-            type="submit">Create Vault
-            <i class="fas fa-plus"></i>
-          </button> -->
           <h6 class="title">Create a Vault</h6>
           <form @submit.prevent="addVault">
             <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
@@ -26,28 +22,10 @@
               <p class="card-text">{{vault.description}}</p>
               <router-link class="btn btn-secondary" :to="{ name: 'vault', params: {vaultId: vault.id}}">Enter Vault
               </router-link>
-              <button class="btn btn-danger" @click="deleteVault(vault.id)">Delete Vault</button>
+              <button class="btn btn-danger" @click="deleteVault(vault)">Delete Vault</button>
             </div>
           </div>
         </div>
-        <!-- Modal -->
-        <!-- <div class="modal fade" id="vaultModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-          aria-hidden="true">
-          <div class="modal-dialog cascading-modal">
-            <div class="modal-content">
-              <div class="modal-header info-color white-text">
-                <h6 class="title">Create a Vault</h6>
-                <form @submit.prevent="addVault">
-                  <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">x</span>
-                  </button>
-                  <input type="text" class="form-control" placeholder="title" v-model="newVault.name" required>
-                  <input type="text" class="form-control" placeholder="description" v-model="newVault.description">
-                </form>
-              </div>
-            </div>
-          </div>
-        </div> -->
       </div>
     </div>
   </div>
@@ -80,11 +58,10 @@
       addVault() {
         this.$store.dispatch("addVault", this.newVault);
         this.newVault = { title: "", description: "" };
-        // $("#vaultModal").modal("hide");
-        // $(".modal-backdrop").remove();
       },
-      deleteVault(vaultId) {
-        this.$store.dispatch("deleteVault", vaultId);
+      deleteVault(vault) {
+        console.log(vault)
+        this.$store.dispatch("deleteVault", vault);
       }
 
     },

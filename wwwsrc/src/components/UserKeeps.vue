@@ -10,10 +10,9 @@
               <h5 class="card-title">{{keep.name}}</h5>
               <p class="card-text">{{keep.description}}
               </p>
-              <!-- <button class="btn btn-primary" @click="addView">Views:{{keep.views}}</button> -->
               <button class="btn btn-primary">Shares:{{keep.shares}}</button>
               <button class="btn btn-primary">Keeps:{{keep.keeps}}</button>
-              <button class="btn btn-primary" type="submit" @click="deleteKeep(keep.id)">Delete My Keep</button>
+              <button class="btn btn-primary" type="submit" @click="deleteKeep(keep)">Delete My Keep</button>
             </div>
           </div>
         </div>
@@ -41,8 +40,8 @@
       }
     },
     methods: {
-      deleteKeep(keepId) {
-        this.$store.dispatch("deleteKeep", keepId);
+      deleteKeep(keep) {
+        this.$store.dispatch("deleteKeep", keep);
       }
     },
     components: {}

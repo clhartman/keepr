@@ -3,7 +3,8 @@
     <h1>Welcome Home {{user.username}}</h1>
     <button v-if="user.id" @click="logout">logout</button>
     <router-link v-else :to="{name: 'login'}">Login</router-link>
-    <div class="col">
+    <router-link v-if="user.id" class="btn btn-secondary" :to="{name: 'dashboard'}">Dashboard</router-link>
+    <!-- <div class="col">
       <h6 class="title">Create a Keep</h6>
       <form @submit.prevent="addKeep">
         <input type="text" class="form-control" placeholder="title" v-model="newKeep.name" required>
@@ -12,18 +13,18 @@
         <input type="checkbox" v-model="newKeep.isPrivate">Private: {{newKeep.isPrivate}}
         <button class="btn btn-secondary" type="submit">Create Keep</button>
       </form>
-    </div>
+    </div> -->
     <KeepList v-bind:keeps="publicKeeps" />
-    <VaultList />
-    <UserKeeps />
+    <!-- <VaultList /> -->
+    <!-- <UserKeeps /> -->
   </div>
 </template>
 
 <script>
 
   import KeepList from '@/components/KeepList.vue';
-  import VaultList from '@/components/VaultList.vue';
-  import UserKeeps from '@/components/UserKeeps.vue';
+  // import VaultList from '@/components/VaultList.vue';
+  // import UserKeeps from '@/components/UserKeeps.vue';
   export default {
     name: "home",
     computed: {
@@ -49,17 +50,17 @@
     },
     components: {
       KeepList,
-      VaultList,
-      UserKeeps
+      // VaultList,
+      // UserKeeps
     },
     methods: {
       logout() {
         this.$store.dispatch("logout")
       },
-      addKeep() {
-        this.$store.dispatch("addKeep", this.newKeep);
-        this.newKeep = { title: "", description: "", img: "", isPrivate: "" }
-      }
+      // addKeep() {
+      //   this.$store.dispatch("addKeep", this.newKeep);
+      //   this.newKeep = { title: "", description: "", img: "", isPrivate: "" }
+      // }
     }
   };
 </script>
