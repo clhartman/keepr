@@ -7,6 +7,18 @@
         <p class="card-text">{{keepObj.description}}</p>
         <p class="card-text">Keeps: {{keepObj.keeps}}</p>
         <button class="btn btn-primary" @click="viewKeep">Views:{{keepObj.views}}</button>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Dropdown button
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" v-for="vault in vaults" :value="vault.id">
+            {{vault.name}}>
+            <!-- <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a> -->
+          </div>
+        </div>
         <select v-if="!onLogin" v-model="selected" @change="onChange($event.target.value)">
           <!-- <option disabled value>Keeps: {{keepObj.keeps}}</option> -->
           <option v-for="vault in vaults" :value="vault.id">{{vault.name}}</option>

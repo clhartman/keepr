@@ -103,8 +103,9 @@ namespace keepr.Controllers
     }
 
     // DELETE api/vaults/5
+    [Authorize]
     [HttpDelete("{id}")]
-    public ActionResult<String> Delete(Vault value)
+    public ActionResult<Vault> Delete(Vault value)
     {
       var userId = HttpContext.User.FindFirstValue("Id");
 

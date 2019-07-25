@@ -11,9 +11,9 @@ namespace keepr.Models
     public string UserId { get; set; }
     public string Img { get; set; }
     public bool IsPrivate { get; set; }
-    public int Views { get; set; } = 0;
-    public int Shares { get; set; } = 0;
-    public int Keeps { get; set; } = 0;
+    public int Views { get; set; }
+    public int Shares { get; set; }
+    public int Keeps { get; set; }
 
     // public Keep()
     // {

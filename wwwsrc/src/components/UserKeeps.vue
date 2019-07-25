@@ -12,7 +12,7 @@
               </p>
               <button class="btn btn-primary">Shares:{{keep.shares}}</button>
               <button class="btn btn-primary">Keeps:{{keep.keeps}}</button>
-              <button class="btn btn-primary" type="submit" @click="deleteKeep(keep)">Delete My Keep</button>
+              <button class="btn btn-primary" type="submit" @click="deleteKeep(keep.id)">Delete My Keep</button>
             </div>
           </div>
         </div>
@@ -40,8 +40,8 @@
       }
     },
     methods: {
-      deleteKeep(keep) {
-        this.$store.dispatch("deleteKeep", keep);
+      deleteKeep(keepId) {
+        this.$store.dispatch("deleteKeep", keepId);
       }
     },
     components: {}

@@ -90,7 +90,6 @@ export default new Vuex.Store({
     },
     getVaultKeeps({ commit, dispatch }, vaultId) {
       const url = 'vaultkeeps/' + vaultId;
-      console.log(url)
       api.get(url)
         .then(res => {
           console.log(res)
@@ -124,8 +123,8 @@ export default new Vuex.Store({
         .then(res => {
         })
     },
-    deleteKeep({ commit, dispatch }, keep) {
-      api.delete('keeps/' + keep.id)
+    deleteKeep({ commit, dispatch }, keepId) {
+      api.delete('keeps/' + keepId)
         .then(res => {
           dispatch('getUserKeeps')
           dispatch('getPublicKeeps')
@@ -144,7 +143,6 @@ export default new Vuex.Store({
         })
     },
     deleteVault({ commit, dispatch }, vault) {
-      console.log(vault.id)
       api.delete('vaults/' + vault.id)
         .then(res => {
           dispatch('getUserVaults')
