@@ -24,7 +24,9 @@
             <div class="card-img-overlay">
               <h5 class="card-title">{{vault.name}}</h5>
               <p class="card-text">{{vault.description}}</p>
-              <button class="btn btn-secondary" type="submit" @click="deleteVault(vault.id)">Delete Vault</button>
+              <router-link class="btn btn-secondary" :to="{ name: 'vault', params: {vaultId: vault.id}}">Enter Vault
+              </router-link>
+              <button class="btn btn-danger" @click="deleteVault(vault.id)">Delete Vault</button>
             </div>
           </div>
         </div>
@@ -84,6 +86,7 @@
       deleteVault(vaultId) {
         this.$store.dispatch("deleteVault", vaultId);
       }
+
     },
     components: {}
   }

@@ -19,7 +19,8 @@ export default new Vuex.Store({
     user: {},
     publicKeeps: [],
     userKeeps: [],
-    userVaults: []
+    userVaults: [],
+    vaultkeeps: []
   },
   mutations: {
     setUser(state, user) {
@@ -28,6 +29,8 @@ export default new Vuex.Store({
     resetState(state) {
       //clear the entire state object of user data
       state.user = {}
+      state.userKeeps = []
+      state.userVaults = []
     },
     setPublicKeeps(state, keeps) {
       state.publicKeeps = keeps
@@ -37,6 +40,9 @@ export default new Vuex.Store({
     },
     setUserVaults(state, vaults) {
       state.userVaults = vaults
+    },
+    setVaultKeeps(state, vaultkeeps) {
+      state.vaultkeeps = vaultkeeps
     }
   },
   actions: {
@@ -77,11 +83,18 @@ export default new Vuex.Store({
         })
     },
     getUserKeeps({ commit, dispatch }) {
-      debugger
       api.get('keeps/user')
         .then(res => {
-          console.log(res.data)
           commit("setUserKeeps", res.data)
+        })
+    },
+    getVaultKeeps({ commit, dispatch }, vaultId) {
+      const url = 'vaultkeeps/' + vaultId;
+      console.log(url)
+      api.get(url)
+        .then(res => {
+          console.log(res)
+          commit("setVaultKeeps", res.data)
         })
     },
     addKeep({ commit, dispatch }, keepData) {
@@ -90,10 +103,37 @@ export default new Vuex.Store({
           dispatch("getPublicKeeps")
         })
     },
+
+    // saveKeepToVault({ commit, dispatch }, { vaultId, keepId }) {
+    saveKeepToVault({ commit, dispatch }, payload) {
+      //creating variables that are getting assigned values by pulling the values from payload with the same name as the key
+      // const { vaultId, keepId } = payload;
+      // console.log(`vaultId: ${vaultId}, keepId: ${keepId}`)
+      api.post('vaultkeeps', payload)
+        .then(res => {
+        })
+    },
+    removeKeepFromVault({ commit, dispatch }, payload) {
+      api.put('vaultkeeps', payload)
+        .then(res => {
+          dispatch('getVaultKeeps', payload.vaultId)
+        })
+    },
+    updateKeep({ commit, dispatch }, payload) {
+      api.put('keeps/' + payload.id, payload)
+        .then(res => {
+        })
+    },
+    deleteKeep({ commit, dispatch }, keepId) {
+      api.delete('keeps/' + keepId)
+        .then(res => {
+          dispatch('getUserKeeps')
+          dispatch('getPublicKeeps')
+        })
+    },
     getUserVaults({ commit, dispatch }) {
       api.get('vaults')
         .then(res => {
-          console.log(res.data)
           commit("setUserVaults", res.data)
         })
     },

@@ -22,7 +22,7 @@ namespace keepr.Controllers
 
     // GET api/vaultkeeps/5
     [Authorize]
-    [HttpGet("{:vaultId}")]
+    [HttpGet("{vaultId}")]
     public ActionResult<IEnumerable<Keep>> Get(int vaultId)
     {
       var userId = HttpContext.User.FindFirstValue("Id");

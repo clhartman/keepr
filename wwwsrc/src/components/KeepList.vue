@@ -4,20 +4,7 @@
     <div class="container" id="public-keeps">
       <div class="row">
         <div class="col" v-for="keep in keeps">
-          <div class="card" style="width: 18rem;">
-            <img :src="keep.img" class="card-img-top">
-            <div class="card-body">
-              <h5 class="card-title">{{keep.name}}</h5>
-              <p class="card-text">{{keep.description}}
-              </p>
-              <!-- <button class="btn btn-primary" @click="addView">Views:{{keep.views}}</button> -->
-              <select v-model="selected">
-                <option disabled value>Keeps: {{keep.keeps}}</option>
-                <option v-for="vault in vaults" :value="vault.id">{{vault.name}}</option>
-              </select>
-              <button class="btn btn-primary">Shares:{{keep.shares}}</button>
-            </div>
-          </div>
+          <keep v-bind:keepObj="keep" />
         </div>
       </div>
     </div>
@@ -25,32 +12,23 @@
 </template>
 
 <script>
+  import Keep from '@/components/Keep.vue';
+
   export default {
     name: "KeepList",
-    props: [""],
+    props: { keeps: Array },
     mounted() {
-      this.$store.dispatch("getPublicKeeps");
-      this.$store.dispatch("getUserVaults")
-    },
-    data() {
-      return {
-        selected: ""
-      }
+      // this.$store.dispatch("getPublicKeeps");
     },
     computed: {
-      keeps() {
-        return this.$store.state.publicKeeps;
-      },
-      vaults() {
-        return this.$store.state.userVaults;
-      }
+      // keeps() {
+      //   return this.$store.state.publicKeeps;
+      // },
     },
     methods: {
-      // addView() {
-      // keep.keeps++
-      // this.$store.dispatch("addView", )  
-      // }
     },
-    components: {}
+    components: {
+      Keep
+    }
   }
 </script>

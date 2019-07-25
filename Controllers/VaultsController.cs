@@ -108,6 +108,7 @@ namespace keepr.Controllers
     {
       try
       {
+        // TODO: Enforce userid matches logged in user
         return Ok(_repo.Delete(id));
       }
       catch (Exception e)

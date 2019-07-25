@@ -17,7 +17,7 @@
                 <p v-else>Already have an account? Click to Login</p>
             </div>
         </div>
-        <KeepList />
+        <KeepList v-bind:keeps="publicKeeps" />
     </div>
 </template>
 
@@ -45,6 +45,14 @@
             if (this.$store.state.user.id) {
                 this.$router.push({ name: "home" })
             }
+        },
+        computed: {
+            publicKeeps() {
+                return this.$store.state.publicKeeps;
+            }
+        },
+        mounted() {
+            this.$store.dispatch("getPublicKeeps");
         },
         components: {
             KeepList

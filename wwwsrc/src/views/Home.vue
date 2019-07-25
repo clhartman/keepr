@@ -13,7 +13,7 @@
         <button class="btn btn-secondary" type="submit">Create Keep</button>
       </form>
     </div>
-    <KeepList />
+    <KeepList v-bind:keeps="publicKeeps" />
     <VaultList />
     <UserKeeps />
   </div>
@@ -29,7 +29,13 @@
     computed: {
       user() {
         return this.$store.state.user;
+      },
+      publicKeeps() {
+        return this.$store.state.publicKeeps;
       }
+    },
+    mounted() {
+      this.$store.dispatch("getPublicKeeps");
     },
     data() {
       return {
@@ -48,7 +54,7 @@
     },
     methods: {
       logout() {
-        this.$store.dispatch("logout");
+        this.$store.dispatch("logout")
       },
       addKeep() {
         this.$store.dispatch("addKeep", this.newKeep);

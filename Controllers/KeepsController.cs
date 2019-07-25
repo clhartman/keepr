@@ -82,7 +82,7 @@ namespace keepr.Controllers
     }
 
     // PUT api/keeps/5
-    [Authorize]
+    // [Authorize]
     [HttpPut("{id}")]
     public ActionResult<Keep> Put(int id, [FromBody] Keep value)
     {
